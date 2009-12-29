@@ -30,7 +30,7 @@ public class GameLogic {
 	}
 	
 	public void shuffle() {
-		for (int i = 0; i < 60; i++) {
+		for (int i = 0; i < 100; i++) {
 			randomMove();
 		}
 		updateState();

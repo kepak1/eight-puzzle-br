@@ -1,14 +1,16 @@
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 public class WinDialog extends JDialog implements ActionListener {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String s = "<html><h2>contratulations !</h2><br>"
 			+ "<pre> like to try again?</pre></html>";
 	JLabel msg = new JLabel(s);

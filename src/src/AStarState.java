@@ -1,5 +1,5 @@
 
-public class AStarState extends State implements Comparable{
+public class AStarState extends State implements Comparable<AStarState>{
 	int g;
 	AStarState(){
 		super();
@@ -27,8 +27,7 @@ public class AStarState extends State implements Comparable{
 		return res;
 	}
 	@Override
-	public int compareTo(Object o) {
-		AStarState t=(AStarState)o;
+	public int compareTo(AStarState t) {
 		int l=findH()+g,r=t.findH()+t.g;
 		if(l>r)return 1;
 		if(l<r)return -1;
