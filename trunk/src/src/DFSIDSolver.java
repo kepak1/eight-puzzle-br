@@ -1,70 +1,84 @@
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Set;
 
 
 
 public class DFSIDSolver extends Solver{
-	private GameLogic gl = GameLogic.getInstance();
-	private static State target;
-	private static HashMap<State, State> M = new HashMap<State, State>();
+	protected Set<State> S = new HashSet<State>();
 	
-
-	static void iterativeDeepening(State s,int bound){
+	private static DFSIDSolver instance=new DFSIDSolver();
+	private DFSIDSolver(){}
+	public static DFSIDSolver getInstance(){return instance;}
+	public static final int MAX_DEPTH=30;
+	
+	void iterativeDeepening(State s,int bound){
+		S.clear();
+		S.add(s);
 		for(int i=1;i<=bound;i++){
-			M.clear();
-			M.put(s, null);
 			dfsid(s,i);
 			if(target!=null)return;
 		}
 	}
-	static void dfsid(State s,int dep){
-		State ns;
+	void dfsid(State s,int dep){
 		if(dep<0)return;
 		if(s.isTarget()){
-			System.out.println(s);
 			target=s;
 		}
 		if(target!=null)return;
+		State ns;
 		ns=moveUp(s);
-		if(ns!=null && !M.containsKey(ns)){
-			M.put(ns,s);
+		if(ns!=null && !S.contains(ns)){
+			S.add(ns);
 			dfsid(ns,dep-1);
+			if(target!=null)return;
+			S.remove(ns);
 		}
 		ns=moveDown(s);
-		if(ns!=null && !M.containsKey(ns)){
-			M.put(ns,s);
+		if(ns!=null && !S.contains(ns)){
+			S.add(ns);
 			dfsid(ns,dep-1);
+			if(target!=null)return;
+			S.remove(ns);
 		}
 		ns=moveLeft(s);
-		if(ns!=null && !M.containsKey(ns)){
-			M.put(ns,s);
+		if(ns!=null && !S.contains(ns)){
+			S.add(ns);
 			dfsid(ns,dep-1);
+			if(target!=null)return;
+			S.remove(ns);
 		}
 		ns=moveRight(s);
-		if(ns!=null && !M.containsKey(ns)){
-			M.put(ns,s);
+		if(ns!=null && !S.contains(ns)){
+			S.add(ns);
 			dfsid(ns,dep-1);
+			if(target!=null)return;
+			S.remove(ns);
 		}
 	}
-	private static String collectSolution(){
-		State cur=target,pa;
-		StringBuffer res=new StringBuffer();
-		while(true){
-			pa=M.get(cur);
-			if(pa==null)break;
-			res.append(cur.move);
-			cur=pa;
-		}
-		res.reverse();
-		return res.toString();
-	}
+	
 	public String solve() {
-		M.clear();
+		long st=System.currentTimeMillis();
 		target=null;
-		State st = new State(GameLogic.getInstance());
-		M.put(st, null);
-		iterativeDeepening(st,30);
+		State s = new State(GameLogic.getInstance());
+		iterativeDeepening(s,MAX_DEPTH);
+		timeCost=System.currentTimeMillis()-st;
 		return collectSolution();
 	}
+	public String solve(String str){
+		long startTime=System.currentTimeMillis();
+		target=null;
+		State s = new State(str);
+		iterativeDeepening(s,MAX_DEPTH);
+		timeCost=System.currentTimeMillis()-startTime;
+		return collectSolution();
+	}
+	
+	public static void main(String[] args){
+		String res=instance.solve("470563812");
+		System.out.println(res);
+	}
+	
 }
