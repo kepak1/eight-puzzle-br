@@ -42,7 +42,7 @@ public class Menu extends JMenuBar implements ActionListener{
 		}else if(e.getSource()==four){
 			GamePanel.getInstance().init(4);
 		}else if(e.getSource()==solve){
-			StatusBar.getInstance().setSolution(Solver.solve());
+			StatusBar.getInstance().setSolution(BFSSolver.getInstance().solve());
 		}
 		Game.getInstance().pack();
 	}
