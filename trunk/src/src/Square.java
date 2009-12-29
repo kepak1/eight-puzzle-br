@@ -1,10 +1,13 @@
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 
 import javax.swing.JButton;
 
 public class Square extends JButton {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int idx;	//the location of square, not the value(text)
 
 	Square(int idx){

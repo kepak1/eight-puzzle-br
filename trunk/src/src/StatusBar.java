@@ -1,11 +1,13 @@
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class StatusBar extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static StatusBar instance = new StatusBar();
 	private JTextField sol = new JTextField();
 
