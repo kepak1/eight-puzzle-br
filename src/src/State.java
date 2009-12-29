@@ -5,7 +5,9 @@ public class State {
 	int dim, emptyIdx;
 	State target;
 	char move; // from parent state to this state
-
+	State pre;
+	
+	State(){}
 	State(GameLogic gl) {
 		dim = gl.getDim();
 		emptyIdx = gl.getEmptyIdx();
@@ -14,8 +16,16 @@ public class State {
 			digit[i] = gl.getDigit(i);
 		}
 	}
+	State(String s){
+		dim = (int)(Math.sqrt(s.length())+1e-6);
+		digit = new int[dim * dim];
+		for (int i = 0; i < dim * dim; i++) {
+			digit[i] = s.charAt(i)-'0';
+			if(digit[i]==0)emptyIdx=i;
+		}
+	}
 
-	State(State s) {
+	public void copy(State s){
 		dim = s.dim;
 		emptyIdx = s.emptyIdx;
 		digit = new int[s.digit.length];
@@ -23,7 +33,6 @@ public class State {
 			digit[i] = s.digit[i];
 		}
 	}
-
 	@Override
 	public int hashCode() {
 		int res = 0;

@@ -28,11 +28,13 @@ public class GameLogic {
 		emptyIdx = dim * dim - 1;
 		state = 0;
 	}
-
+	
 	public void shuffle() {
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 60; i++) {
 			randomMove();
 		}
+		updateState();
+		if(state==1)shuffle();
 	}
 
 	public int getDim(){
