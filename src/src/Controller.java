@@ -12,15 +12,16 @@ public class Controller implements ActionListener{
 	public static Controller getInstance(){
 		return instance;
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		GamePanel pg=GamePanel.getInstanc();
+		//System.out.println(((Square)e.getSource()).getSize());
+		GamePanel pg=GamePanel.getInstance();
+		int dim=pg.getDim();
 		int chosenIdx=((Square)e.getSource()).getIdx();
 		int emptyIdx=pg.getEmptyIdx();
-		if(chosenIdx==emptyIdx+3){
+		if(chosenIdx==emptyIdx+dim){
 			pg.moveUp();
-		}else if(chosenIdx==emptyIdx-3){
+		}else if(chosenIdx==emptyIdx-dim){
 			pg.moveDown();
 		}else if(chosenIdx==emptyIdx+1){
 			pg.moveLeft();
