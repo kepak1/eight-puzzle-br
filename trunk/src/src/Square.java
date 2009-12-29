@@ -8,7 +8,8 @@ public class Square extends JButton {
 	private int idx;	//the location of square, not the value(text)
 
 	Square(int idx){
-		this.setPreferredSize(new Dimension(100, 100));
+		//this.setSize(80, 80);
+		this.setPreferredSize(new Dimension(80,80));
 		this.idx=idx;
 		setValue(idx);
 		this.addActionListener(Controller.getInstance());

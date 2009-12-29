@@ -32,7 +32,8 @@ public class WinDialog extends JDialog implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == ok) {
-			GamePanel.getInstanc().newGame();
+			GamePanel.getInstance().newGame();
+			StatusBar.getInstance().setSolution("");
 		}
 		this.dispose();
 	}

@@ -2,45 +2,54 @@ import java.util.Random;
 
 public class GameLogic {
 	private static GameLogic instance = new GameLogic();
-	private int digit[] = new int[9];
+	private int dim;
+	private int[] digit;
 	private int emptyIdx;
 	private Random rand = new Random();
 	/*
-	 * state:
-	 * 	0: playing
-	 *  1: win
+	 * state: 0: playing 1: win
 	 */
-	private int state;	
+	private int state;
 
 	private GameLogic() {
-		init();
+		this(3);
 	}
 
-	
-	public void init() {
-		for (int i = 0; i < 8; i++)
+	private GameLogic(int dim) {
+		init(dim);
+	}
+
+	public void init(int dim) {
+		digit = new int[dim * dim];
+		this.dim = dim;
+		for (int i = 0; i < dim * dim - 1; i++)
 			digit[i] = 1 + i;
-		digit[8] = 0;
-		emptyIdx = 8;
-		state=0;
+		digit[dim * dim - 1] = 0;
+		emptyIdx = dim * dim - 1;
+		state = 0;
 	}
 
 	public void shuffle() {
-		for (int i = 0; i < 20; i++) {
+		for (int i = 0; i < 30; i++) {
 			randomMove();
 		}
 	}
-	
-	public int getDigit(int i){
+
+	public int getDim(){
+		return dim;
+	}
+	public int getDigit(int i) {
 		return digit[i];
 	}
-	public int getEmptyIdx(){
+
+	public int getEmptyIdx() {
 		return emptyIdx;
 	}
-	public int getState(){
+
+	public int getState() {
 		return state;
 	}
-	
+
 	private void randomMove() {
 		while (true) {
 			switch (Math.abs(rand.nextInt()) % 4) {
@@ -78,38 +87,39 @@ public class GameLogic {
 		digit[j] = t;
 	}
 
-	private void updateState(){
-		for(int i=0;i<8;i++){
-			if(digit[i]!=1+i){
-				state=0;
+	private void updateState() {
+		for (int i = 0; i < dim * dim - 1; i++) {
+			if (digit[i] != 1 + i) {
+				state = 0;
 				return;
 			}
 		}
 		/*
-		 * 	else, win already
-		 * */
-		state=1;	
+		 * else, win already
+		 */
+		state = 1;
 	}
+
 	public boolean moveDown() {
-		if (emptyIdx <= 2)
+		if (emptyIdx < dim)
 			return false;
-		swapDigit(emptyIdx, emptyIdx - 3);
-		emptyIdx -= 3;
+		swapDigit(emptyIdx, emptyIdx - dim);
+		emptyIdx -= dim;
 		updateState();
 		return true;
 	}
 
 	public boolean moveUp() {
-		if (emptyIdx >= 6)
+		if (emptyIdx >= dim * dim - dim)
 			return false;
-		swapDigit(emptyIdx, emptyIdx + 3);
-		emptyIdx += 3;
+		swapDigit(emptyIdx, emptyIdx + dim);
+		emptyIdx += dim;
 		updateState();
 		return true;
 	}
 
 	public boolean moveLeft() {
-		if (emptyIdx % 3 == 2)
+		if (emptyIdx % dim == dim - 1)
 			return false;
 		swapDigit(emptyIdx, emptyIdx + 1);
 		emptyIdx += 1;
@@ -118,7 +128,7 @@ public class GameLogic {
 	}
 
 	public boolean moveRight() {
-		if (emptyIdx % 3 == 0)
+		if (emptyIdx % dim == 0)
 			return false;
 		swapDigit(emptyIdx, emptyIdx - 1);
 		emptyIdx -= 1;
@@ -129,13 +139,13 @@ public class GameLogic {
 	@Override
 	public String toString() {
 		StringBuffer res = new StringBuffer();
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i < dim * dim; i++) {
 			if (digit[i] == 0) {
 				res.append(" ");
 			} else {
 				res.append(Integer.toString(digit[i]));
 			}
-			res.append(i % 3 == 2 ? '\n' : ' ');
+			res.append(i % dim == dim - 1 ? '\n' : '\t');
 		}
 		return res.toString();
 	}

@@ -7,7 +7,7 @@ public class TextUI {
 
 		Scanner in = new Scanner(System.in);
 		do {
-			gl.init();
+			gl.init(4);
 			while (true) {
 				System.out.println(gl);
 				cmd = in.nextLine();
