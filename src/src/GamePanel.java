@@ -61,21 +61,33 @@ public class GamePanel extends JPanel {
 	public void moveUp() {
 		gl.moveUp();
 		relocateSquares();
+		if (GameLogic.getInstance().getState() == 1) {
+			new WinDialog();
+		}
 	}
 
 	public void moveDown() {
 		gl.moveDown();
 		relocateSquares();
+		if (GameLogic.getInstance().getState() == 1) {
+			new WinDialog();
+		}
 	}
 
 	public void moveLeft() {
 		gl.moveLeft();
 		relocateSquares();
+		if (GameLogic.getInstance().getState() == 1) {
+			new WinDialog();
+		}
 	}
 
 	public void moveRight() {
 		gl.moveRight();
 		relocateSquares();
+		if (GameLogic.getInstance().getState() == 1) {
+			new WinDialog();
+		}
 	}
 
 

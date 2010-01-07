@@ -27,7 +27,7 @@ public class WinDialog extends JDialog implements ActionListener {
 		this.add(msg);
 		this.add(ok);
 		this.setResizable(false);
-		this.setLocation(this.getParent().getX(), this.getParent().getY());
+		this.setLocation(Game.getInstance().getX(), Game.getInstance().getY());
 		ok.addActionListener(this);
 	}
 
