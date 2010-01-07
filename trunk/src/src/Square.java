@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.JButton;
 
@@ -12,9 +13,10 @@ public class Square extends JButton {
 
 	Square(int idx){
 		//this.setSize(80, 80);
-		this.setPreferredSize(new Dimension(80,80));
+		this.setPreferredSize(new Dimension(100,100));
 		this.idx=idx;
 		setValue(idx);
+		this.setFont(new Font("SansSerif", Font.BOLD, 20));
 		this.addActionListener(Controller.getInstance());
 	}
 	public int getIdx(){
