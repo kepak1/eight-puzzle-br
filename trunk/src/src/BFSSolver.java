@@ -9,11 +9,11 @@ public class BFSSolver extends Solver{
 	private BFSSolver(){}
 	public static BFSSolver getInstance(){return instance;}
 
-	protected Set<State> S = new HashSet<State>();
 	private void bfs(State s) {
+		Set<State> S = new HashSet<State>();
 		Queue<State> q=new LinkedList<State>();
+		S.add(s);
 		q.add(s);
-		q.isEmpty();
 		State ns;
 		while(!q.isEmpty()){
 			s=q.poll();
@@ -46,28 +46,25 @@ public class BFSSolver extends Solver{
 	
 	public String solve(){
 		long startTime=System.currentTimeMillis();
-		S.clear();
 		target=null;
 		State s = new State(GameLogic.getInstance());
-		S.add(s);
 		bfs(s);
 		timeCost=System.currentTimeMillis()-startTime;
 		return collectSolution();
 	}
 	
-	public String solve(String str){
+	public String solve(int[] a){
 		long startTime=System.currentTimeMillis();
-		S.clear();
 		target=null;
-		State s = new State(str);
-		S.add(s);
+		State s = new State(a);
 		bfs(s);
 		timeCost=System.currentTimeMillis()-startTime;
 		return collectSolution();
 	}
 	
 	public static void main(String[] args){
-		String res=instance.solve("470563812");
+		int[] a={4,7,0,5,6,3,8,1,2,};
+		String res = instance.solve(a);
 		System.out.println(res);
 	}
 	

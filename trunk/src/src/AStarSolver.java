@@ -82,12 +82,12 @@ public class AStarSolver extends Solver {
 		return collectSolution();
 	}
 	
-	public String solve(String str){
+	public String solve(int[] a){
 		long startTime=System.currentTimeMillis();
 		open.clear();
 		close.clear();
 		M.clear();
-		AStarState st=new AStarState(str);
+		AStarState st=new AStarState(a);
 		st.g=0;
 		open.add(st);
 		AStar();
@@ -96,7 +96,8 @@ public class AStarSolver extends Solver {
 	}
 	
 	public static void main(String[] args){
-		String res=instance.solve("470563812");
+		int[] a={4,7,0,5,6,3,8,1,2,};
+		String res = instance.solve(a);
 		System.out.println(res);
 	}
 

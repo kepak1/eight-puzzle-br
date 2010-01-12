@@ -64,17 +64,18 @@ public class DFSIDSolver extends Solver{
 		timeCost=System.currentTimeMillis()-st;
 		return collectSolution();
 	}
-	public String solve(String str){
+	public String solve(int[] a){
 		long startTime=System.currentTimeMillis();
 		target=null;
-		State s = new State(str);
+		State s = new State(a);
 		iterativeDeepening(s,MAX_DEPTH);
 		timeCost=System.currentTimeMillis()-startTime;
 		return collectSolution();
 	}
 	
 	public static void main(String[] args){
-		String res=instance.solve("470563812");
+		int[] a={4,7,0,5,6,3,8,1,2,};
+		String res = instance.solve(a);
 		System.out.println(res);
 	}
 	

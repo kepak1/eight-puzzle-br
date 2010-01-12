@@ -19,18 +19,20 @@ public class GameLogic {
 		init(dim);
 	}
 
+
 	public void init(int dim) {
 		digit = new int[dim * dim];
 		this.dim = dim;
-		for (int i = 0; i < dim * dim - 1; i++)
+		int top=dim * dim - 1;
+		for (int i = 0; i < top; i++)
 			digit[i] = 1 + i;
-		digit[dim * dim - 1] = 0;
-		emptyIdx = dim * dim - 1;
+		digit[top] = 0;
+		emptyIdx = top;
 		state = 0;
 	}
 	
 	public void shuffle() {
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 50; i++) {
 			randomMove();
 		}
 		updateState();
@@ -90,7 +92,8 @@ public class GameLogic {
 	}
 
 	private void updateState() {
-		for (int i = 0; i < dim * dim - 1; i++) {
+		int top=dim * dim - 1;
+		for (int i = 0; i < top; i++) {
 			if (digit[i] != 1 + i) {
 				state = 0;
 				return;

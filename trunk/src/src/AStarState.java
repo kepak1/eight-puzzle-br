@@ -1,14 +1,12 @@
 
 public class AStarState extends State implements Comparable<AStarState>{
 	int g;
-	AStarState(){
-		super();
-	}
+	AStarState(){super();}
 	public AStarState(GameLogic instance) {
 		super(instance);
 	}
-	public AStarState(String str) {
-		super(str);
+	public AStarState(int[] a) {
+		super(a);
 	}
 	public void copy(AStarState s){
 		super.copy(s);

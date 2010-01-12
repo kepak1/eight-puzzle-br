@@ -3,11 +3,11 @@
 public class State {
 	int[] digit;
 	int dim, emptyIdx;
-	State target;
+	//State target;
 	char move; // from parent state to this state
 	State pre;
 	
-	State(){}
+	State(){this(GameLogic.getInstance());}
 	State(GameLogic gl) {
 		dim = gl.getDim();
 		emptyIdx = gl.getEmptyIdx();
@@ -16,27 +16,38 @@ public class State {
 			digit[i] = gl.getDigit(i);
 		}
 	}
-	State(String s){
-		dim = (int)(Math.sqrt(s.length())+1e-6);
-		digit = new int[dim * dim];
-		for (int i = 0; i < dim * dim; i++) {
-			digit[i] = s.charAt(i)-'0';
+	State(int[] a){
+		dim = (int)(Math.sqrt(a.length)+1e-6);
+		int top=dim * dim;
+		digit = new int[top];
+		for (int i = 0; i < top; i++) {
+			digit[i] = a[i];
 			if(digit[i]==0)emptyIdx=i;
 		}
 	}
 
+	static public State getTartet(){
+		State res=new State();
+		int top=res.dim*res.dim-1;
+		for(int i=0;i<top;i++)
+			res.digit[i]=i+1;
+		res.digit[top]=0;
+		res.emptyIdx=top;
+		return res;
+	}
 	public void copy(State s){
 		dim = s.dim;
 		emptyIdx = s.emptyIdx;
 		digit = new int[s.digit.length];
-		for (int i = 0; i < s.digit.length; i++) {
+		int len= s.digit.length;
+		for (int i = 0; i < len; i++) {
 			digit[i] = s.digit[i];
 		}
 	}
 	@Override
 	public int hashCode() {
-		int res = 0;
-		for (int i = 0; i < dim * dim; i++) {
+		int res = 0,top=dim * dim-1;
+		for (int i = 0; i < top; i++) {
 			res *= 31;
 			res += digit[i];
 		}
@@ -50,7 +61,8 @@ public class State {
 		State t = (State) o;
 		if (dim != t.dim)
 			return false;
-		for (int i = 0; i < t.digit.length; i++) {
+		int len=t.digit.length;
+		for (int i = 0; i < len; i++) {
 			if (digit[i] != t.digit[i])
 				return false;
 		}
@@ -58,7 +70,8 @@ public class State {
 	}
 
 	public boolean isTarget() {
-		for (int i = 0; i < dim * dim - 1; i++) {
+		int top=dim * dim - 1;
+		for (int i = 0; i < top; i++) {
 			if (digit[i] != i + 1)
 				return false;
 		}
