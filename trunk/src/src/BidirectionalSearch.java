@@ -32,7 +32,6 @@ public class BidirectionalSearch extends Solver {
 		while (!q[0].isEmpty() && !q[1].isEmpty()) {
 			s = (State) q[idx].poll();
 			if (M[1 - idx].containsKey(s)) {
-				State t = (State) M[1 - idx].get(s);
 				if (idx == 0) {
 					midL = s;
 					midR = (State) M[1 - idx].get(s);
