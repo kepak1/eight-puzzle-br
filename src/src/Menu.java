@@ -17,7 +17,7 @@ public class Menu extends JMenuBar implements ActionListener {
 			four = new JMenuItem("4 X 4"), five = new JMenuItem("5 X 5"),
 			six = new JMenuItem("6 X 6");
 	JMenuItem bfs = new JMenuItem("bfs"), dfsid = new JMenuItem("dfsid"),
-			AStar = new JMenuItem("AStar");
+			AStar = new JMenuItem("AStar"),bidirection=new JMenuItem("bidirection");
 
 	static Menu instance = new Menu();
 
@@ -34,6 +34,7 @@ public class Menu extends JMenuBar implements ActionListener {
 		solve.add(bfs);
 		solve.add(dfsid);
 		solve.add(AStar);
+		solve.add(bidirection);
 
 		two.addActionListener(this);
 		three.addActionListener(this);
@@ -44,6 +45,7 @@ public class Menu extends JMenuBar implements ActionListener {
 		bfs.addActionListener(this);
 		dfsid.addActionListener(this);
 		AStar.addActionListener(this);
+		bidirection.addActionListener(this);
 
 		this.add(game);
 
@@ -74,6 +76,9 @@ public class Menu extends JMenuBar implements ActionListener {
 			StatusBar.getInstance().setSolution(sol.solve(), sol.timeCost);
 		} else if (e.getSource() == AStar) {
 			Solver sol = AStarSolver.getInstance();
+			StatusBar.getInstance().setSolution(sol.solve(), sol.timeCost);
+		} else if (e.getSource() == bidirection) {
+			Solver sol = BidirectionalSearch.getInstance();
 			StatusBar.getInstance().setSolution(sol.solve(), sol.timeCost);
 		}
 		Game.getInstance().pack();
