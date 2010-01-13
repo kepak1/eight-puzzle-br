@@ -19,12 +19,11 @@ public class AStarState extends State implements Comparable<AStarState> {
 		h = findH();
 	}
 
-	private int findH() {
+	public int findH() {
 		int res = 0, top = this.getDim() * this.getDim();
 		for (int i = 0; i < top; i++) {
+			if(i==getEmptyIdx())continue;
 			int d = this.getDigit(i) - 1;
-			if (d == -1)
-				d = top - 1;
 			int x1 = i / this.getDim(), y1 = i % this.getDim(), x2 = d
 					/ this.getDim(), y2 = d % this.getDim();
 			res += Math.abs(x2 - x1);
@@ -33,7 +32,19 @@ public class AStarState extends State implements Comparable<AStarState> {
 		return res;
 	}
 
-	private int f() {
+	public void setH(int x) {
+		h = x;
+	}
+
+	public int h() {
+		return h;
+	}
+
+	public int g() {
+		return g;
+	}
+
+	public int f() {
 		return h + g;
 	}
 

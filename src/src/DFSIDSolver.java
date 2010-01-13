@@ -4,6 +4,10 @@ import java.util.Set;
 
 
 public class DFSIDSolver extends Solver{
+	/*
+	 * This is not really DFSID, because it stores a table to check duplicates, 
+	 * 	which requires extra memory
+	 * */
 	protected Set<State> S = new HashSet<State>();
 	
 	private static DFSIDSolver instance=new DFSIDSolver();

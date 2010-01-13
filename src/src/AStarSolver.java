@@ -1,4 +1,3 @@
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Set;
@@ -13,15 +12,14 @@ public class AStarSolver extends Solver {
 		return instance;
 	}
 
-	private HashMap<State, State> M = new HashMap<State, State>();
 	private PriorityQueue<AStarState> open = new PriorityQueue<AStarState>();
 	private Set<AStarState> close = new HashSet<AStarState>();
+
 
 	// Scanner in=new Scanner(System.in);
 	public void AStar(AStarState st) {
 		open.clear();
 		close.clear();
-		M.clear();
 		open.add(st);
 		AStarState s, ns;
 		while (!open.isEmpty()) {
