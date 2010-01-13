@@ -1,6 +1,5 @@
-
 public class State {
-	private int[] digit;
+	private byte[] digit;
 	private int dim, emptyIdx;
 	// State target;
 	private char move; // from parent state to this state
@@ -27,7 +26,7 @@ public class State {
 	}
 
 	private void swapDigit(int i, int j) {
-		int t = digit[i];
+		byte t = digit[i];
 		digit[i] = digit[j];
 		digit[j] = t;
 	}
@@ -51,18 +50,18 @@ public class State {
 	State(GameLogic gl) {
 		dim = gl.getDim();
 		emptyIdx = gl.getEmptyIdx();
-		digit = new int[dim * dim];
+		digit = new byte[dim * dim];
 		for (int i = 0; i < dim * dim; i++) {
-			digit[i] = gl.getDigit(i);
+			digit[i] = (byte) gl.getDigit(i);
 		}
 	}
 
 	State(int[] a) {
 		dim = (int) (Math.sqrt(a.length) + 1e-6);
 		int top = dim * dim;
-		digit = new int[top];
+		digit = new byte[top];
 		for (int i = 0; i < top; i++) {
-			digit[i] = a[i];
+			digit[i] = (byte) a[i];
 			if (digit[i] == 0)
 				emptyIdx = i;
 		}
@@ -72,7 +71,7 @@ public class State {
 		State res = new State();
 		int top = res.dim * res.dim - 1;
 		for (int i = 0; i < top; i++)
-			res.digit[i] = i + 1;
+			res.digit[i] = (byte) (i + 1);
 		res.digit[top] = 0;
 		res.emptyIdx = top;
 		return res;
@@ -81,7 +80,7 @@ public class State {
 	private void copy(State s) {
 		dim = s.dim;
 		emptyIdx = s.emptyIdx;
-		digit = new int[s.digit.length];
+		digit = new byte[s.digit.length];
 		int len = s.digit.length;
 		for (int i = 0; i < len; i++) {
 			digit[i] = s.digit[i];
