@@ -3,12 +3,12 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
-public class BidirectionalSearch extends Solver {
-	private static BidirectionalSearch instance = new BidirectionalSearch();
+public class BidirectionalSearchSolver extends Solver {
+	private static BidirectionalSearchSolver instance = new BidirectionalSearchSolver();
 
-	private BidirectionalSearch() {}
+	private BidirectionalSearchSolver() {}
 
-	public static BidirectionalSearch getInstance() {
+	public static BidirectionalSearchSolver getInstance() {
 		return instance;
 	}
 

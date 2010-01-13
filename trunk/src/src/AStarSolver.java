@@ -54,7 +54,6 @@ public class AStarSolver extends Solver {
 		close.clear();
 		M.clear();
 		AStarState st=new AStarState(GameLogic.getInstance());
-		st.g=0;
 		open.add(st);
 		AStar();
 		timeCost=System.currentTimeMillis()-startTime;
@@ -67,7 +66,6 @@ public class AStarSolver extends Solver {
 		close.clear();
 		M.clear();
 		AStarState st=new AStarState(a);
-		st.g=0;
 		open.add(st);
 		AStar();
 		timeCost=System.currentTimeMillis()-startTime;

@@ -78,7 +78,7 @@ public class Menu extends JMenuBar implements ActionListener {
 			Solver sol = AStarSolver.getInstance();
 			StatusBar.getInstance().setSolution(sol.solve(), sol.timeCost);
 		} else if (e.getSource() == bidirection) {
-			Solver sol = BidirectionalSearch.getInstance();
+			Solver sol = BidirectionalSearchSolver.getInstance();
 			StatusBar.getInstance().setSolution(sol.solve(), sol.timeCost);
 		}
 		Game.getInstance().pack();

@@ -78,7 +78,7 @@ public class State {
 		return res;
 	}
 
-	protected void copy(State s) {
+	private void copy(State s) {
 		dim = s.dim;
 		emptyIdx = s.emptyIdx;
 		digit = new int[s.digit.length];

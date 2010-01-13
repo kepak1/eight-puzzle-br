@@ -1,18 +1,21 @@
 public class AStarState extends State implements Comparable<AStarState> {
-	int g, h;
+	private int g, h;
 
 	AStarState() {
 		super();
+		g = 0;
 		h = findH();
 	}
 
 	public AStarState(GameLogic instance) {
 		super(instance);
+		g = 0;
 		h = findH();
 	}
 
 	public AStarState(int[] a) {
 		super(a);
+		g = 0;
 		h = findH();
 	}
 
