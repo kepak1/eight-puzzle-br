@@ -41,22 +41,22 @@ public class BidirectionalSearch extends Solver {
 				}
 				break;
 			}
-			ns = moveUp(s);
+			ns = State.moveUp(s);
 			if (ns != null && !M[idx].containsKey(ns)) {
 				M[idx].put(ns, ns);
 				q[idx].add(ns);
 			}
-			ns = moveDown(s);
+			ns = State.moveDown(s);
 			if (ns != null && !M[idx].containsKey(ns)) {
 				M[idx].put(ns, ns);
 				q[idx].add(ns);
 			}
-			ns = moveLeft(s);
+			ns = State.moveLeft(s);
 			if (ns != null && !M[idx].containsKey(ns)) {
 				M[idx].put(ns, ns);
 				q[idx].add(ns);
 			}
-			ns = moveRight(s);
+			ns = State.moveRight(s);
 			if (ns != null && !M[idx].containsKey(ns)) {
 				M[idx].put(ns, ns);
 				q[idx].add(ns);
@@ -71,18 +71,18 @@ public class BidirectionalSearch extends Solver {
 		StringBuffer s1 = new StringBuffer(), s2 = new StringBuffer();
 		cur = midL;
 		while (true) {
-			pa = cur.pre;
+			pa = cur.getPre();
 			if (pa == null)
 				break;
-			s1.append(cur.move);
+			s1.append(cur.getMove());
 			cur = pa;
 		}
 		cur = midR;
 		while (true) {
-			pa = cur.pre;
+			pa = cur.getPre();
 			if (pa == null)
 				break;
-			switch (cur.move) {
+			switch (cur.getMove()) {
 			case 'u':
 				s2.append('d');
 				break;
