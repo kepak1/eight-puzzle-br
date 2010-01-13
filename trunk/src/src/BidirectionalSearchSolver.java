@@ -5,23 +5,29 @@ import java.util.Queue;
 
 public class BidirectionalSearchSolver extends Solver {
 	private static BidirectionalSearchSolver instance = new BidirectionalSearchSolver();
+	private State midL, midR;
+	@SuppressWarnings("unchecked")
+	private Map[] M = new HashMap[2];
+	@SuppressWarnings("unchecked")
+	private Queue[] q = new LinkedList[2];
 
-	private BidirectionalSearchSolver() {}
+	private BidirectionalSearchSolver() {
+		M[0] = new HashMap<State, State>();
+		M[1] = new HashMap<State, State>();
+		q[0] = new LinkedList<State>();
+		q[1] = new LinkedList<State>();
+	}
 
 	public static BidirectionalSearchSolver getInstance() {
 		return instance;
 	}
 
-	private State midL, midR;
-
 	@SuppressWarnings("unchecked")
 	private void bfs(State s) {
-		Map[] M = new HashMap[2];
-		M[0] = new HashMap<State, State>();
-		M[1] = new HashMap<State, State>();
-		Queue[] q = new LinkedList[2];
-		q[0] = new LinkedList<State>();
-		q[1] = new LinkedList<State>();
+		M[0].clear();
+		M[1].clear();
+		q[0].clear();
+		q[1].clear();
 		State target = State.getTartet();
 		q[0].add(s);
 		q[1].add(target);
@@ -120,7 +126,7 @@ public class BidirectionalSearchSolver extends Solver {
 	}
 
 	public static void main(String[] args) {
-		int[] a={4,7,0,5,6,3,8,1,2,};
+		int[] a = { 4, 7, 0, 5, 6, 3, 8, 1, 2, };
 		String res = instance.solve(a);
 		System.out.println(res);
 	}
