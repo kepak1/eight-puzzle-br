@@ -1,6 +1,7 @@
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.PriorityQueue;
+import java.util.Scanner;
 import java.util.Set;
 
 public class AStarSolver extends Solver {
@@ -8,38 +9,14 @@ public class AStarSolver extends Solver {
 	private AStarSolver(){}
 	public static AStarSolver getInstance(){return instance;}
 	
-	AStarState moveUp(AStarState s) {
-		AStarState res = (AStarState) super.moveUp(s);
-		if (res != null)
-			res.g = s.g + 1;
-		return res;
-	}
 
-	AStarState moveDown(AStarState s) {
-		AStarState res = (AStarState) super.moveDown(s);
-		if (res != null)
-			res.g = s.g + 1;
-		return res;
-	}
-
-	AStarState moveLeft(AStarState s) {
-		AStarState res = (AStarState) super.moveLeft(s);
-		if (res != null)
-			res.g = s.g + 1;
-		return res;
-	}
-
-	AStarState moveRight(AStarState s) {
-		AStarState res = (AStarState) super.moveRight(s);
-		if (res != null)
-			res.g = s.g + 1;
-		return res;
-	}
 
 	protected HashMap<State, State> M = new HashMap<State, State>();
 	PriorityQueue<AStarState> open = new PriorityQueue<AStarState>();
 	Set<AStarState> close = new HashSet<AStarState>();
 
+	
+	//Scanner in=new Scanner(System.in);
 	public void AStar(){
 		AStarState s,ns;
 		while(!open.isEmpty()){
@@ -50,19 +27,21 @@ public class AStarSolver extends Solver {
 			}
 			if(close.contains(s))continue;
 			close.add(s);
-			ns=moveUp(s);
+			//System.out.println(s.findH()+" "+s.g);
+			//in.next();
+			ns=AStarState.moveUp(s);
 			if(ns!=null && !close.contains(ns)){
 				open.add(ns);
 			}
-			ns=moveDown(s);
+			ns=AStarState.moveDown(s);
 			if(ns!=null && !close.contains(ns)){
 				open.add(ns);
 			}
-			ns=moveLeft(s);
+			ns=AStarState.moveLeft(s);
 			if(ns!=null && !close.contains(ns)){
 				open.add(ns);
 			}
-			ns=moveRight(s);
+			ns=AStarState.moveRight(s);
 			if(ns!=null && !close.contains(ns)){
 				open.add(ns);
 			}
@@ -96,9 +75,10 @@ public class AStarSolver extends Solver {
 	}
 	
 	public static void main(String[] args){
-		int[] a={4,7,0,5,6,3,8,1,2,};
+		int[] a={4,7,0,5,6,3,8,1,2};
 		String res = instance.solve(a);
 		System.out.println(res);
+		System.out.println(instance.close.size());
 	}
 
 }

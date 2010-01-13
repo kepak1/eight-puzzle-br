@@ -26,28 +26,28 @@ public class DFSIDSolver extends Solver{
 		}
 		if(target!=null)return;
 		State ns;
-		ns=moveUp(s);
+		ns=State.moveUp(s);
 		if(ns!=null && !S.contains(ns)){
 			S.add(ns);
 			dfsid(ns,dep-1);
 			if(target!=null)return;
 			S.remove(ns);
 		}
-		ns=moveDown(s);
+		ns=State.moveDown(s);
 		if(ns!=null && !S.contains(ns)){
 			S.add(ns);
 			dfsid(ns,dep-1);
 			if(target!=null)return;
 			S.remove(ns);
 		}
-		ns=moveLeft(s);
+		ns=State.moveLeft(s);
 		if(ns!=null && !S.contains(ns)){
 			S.add(ns);
 			dfsid(ns,dep-1);
 			if(target!=null)return;
 			S.remove(ns);
 		}
-		ns=moveRight(s);
+		ns=State.moveRight(s);
 		if(ns!=null && !S.contains(ns)){
 			S.add(ns);
 			dfsid(ns,dep-1);

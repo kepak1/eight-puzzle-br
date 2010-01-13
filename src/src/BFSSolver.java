@@ -21,22 +21,22 @@ public class BFSSolver extends Solver{
 				target=s;
 				break;
 			}
-			ns=moveUp(s);
+			ns=State.moveUp(s);
 			if(ns!=null && !S.contains(ns)){
 				S.add(ns);
 				q.add(ns);
 			}
-			ns=moveDown(s);
+			ns=State.moveDown(s);
 			if(ns!=null && !S.contains(ns)){
 				S.add(ns);
 				q.add(ns);
 			}
-			ns=moveLeft(s);
+			ns=State.moveLeft(s);
 			if(ns!=null && !S.contains(ns)){
 				S.add(ns);
 				q.add(ns);
 			}
-			ns=moveRight(s);
+			ns=State.moveRight(s);
 			if(ns!=null && !S.contains(ns)){
 				S.add(ns);
 				q.add(ns);

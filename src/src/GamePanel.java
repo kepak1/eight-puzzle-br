@@ -55,7 +55,7 @@ public class GamePanel extends JPanel {
 			squares[i].setValue(gl.getDigit(i));
 		}
 		this.repaint();
-		System.out.println(gl);
+		//System.out.println(gl);
 	}
 
 	public void moveUp() {
