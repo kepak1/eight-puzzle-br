@@ -10,20 +10,20 @@ public class Menu extends JMenuBar implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JMenu game = new JMenu("game");
-	JMenu newGame = new JMenu("new game");
-	JMenu solve = new JMenu("solve");
+	JMenu newGame = new JMenu("new"), solve = new JMenu("solve"),
+			control = new JMenu("control");
 	JMenuItem two = new JMenuItem("2 X 2"), three = new JMenuItem("3 X 3"),
 			four = new JMenuItem("4 X 4"), five = new JMenuItem("5 X 5");
 	JMenuItem bfs = new JMenuItem("bfs"), dfsid = new JMenuItem("dfsid"),
 			AStar = new JMenuItem("A*"), bidirection = new JMenuItem(
-					"bidirection"), AStarID = new JMenuItem("A*ID");
+					"bidirection"), AStarID = new JMenuItem("A*ID"),shuffle=new JMenuItem("shuffle");
 
 	static Menu instance = new Menu();
 
 	private Menu() {
-		game.add(newGame);
-		game.add(solve);
+		this.add(newGame);
+		this.add(solve);
+		this.add(control);
 
 		newGame.add(two);
 		newGame.add(three);
@@ -36,6 +36,10 @@ public class Menu extends JMenuBar implements ActionListener {
 		solve.add(AStar);
 		solve.add(AStarID);
 
+		control.add(shuffle);
+
+		shuffle.addActionListener(this);
+		
 		two.addActionListener(this);
 		three.addActionListener(this);
 		four.addActionListener(this);
@@ -46,8 +50,6 @@ public class Menu extends JMenuBar implements ActionListener {
 		AStar.addActionListener(this);
 		bidirection.addActionListener(this);
 		AStarID.addActionListener(this);
-
-		this.add(game);
 
 	}
 
@@ -68,7 +70,6 @@ public class Menu extends JMenuBar implements ActionListener {
 		} else if (e.getSource() == bfs) {
 			Solver sol = BFSSolver.getInstance();
 			StatusBar.getInstance().setSolution(sol.solve(), sol.timeCost);
-
 		} else if (e.getSource() == dfsid) {
 			Solver sol = DFSIDSolver.getInstance();
 			StatusBar.getInstance().setSolution(sol.solve(), sol.timeCost);
@@ -78,9 +79,11 @@ public class Menu extends JMenuBar implements ActionListener {
 		} else if (e.getSource() == bidirection) {
 			Solver sol = BidirectionalSearchSolver.getInstance();
 			StatusBar.getInstance().setSolution(sol.solve(), sol.timeCost);
-		}else if (e.getSource() == AStarID) {
+		} else if (e.getSource() == AStarID) {
 			Solver sol = AStarIDSolver.getInstance();
 			StatusBar.getInstance().setSolution(sol.solve(), sol.timeCost);
+		} else if(e.getSource()==shuffle){
+			GamePanel.getInstance().shuffle();
 		}
 		Game.getInstance().pack();
 	}
