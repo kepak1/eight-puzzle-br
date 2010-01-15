@@ -37,6 +37,11 @@ public class GamePanel extends JPanel {
 		relocateSquares();
 	}
 
+	public void shuffle(){
+		gl.shuffle();
+		relocateSquares();
+	}
+	
 	public static GamePanel getInstance() {
 		return instance;
 	}
